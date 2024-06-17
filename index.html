@@ -1,0 +1,55 @@
+<!-- index.html -->
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <title>Generador de QR</title>
+    <link rel="stylesheet" type="text/css" href="estilos.css">
+  </head>
+
+  <body>
+    <h2>Crear código QR</h2>
+
+    <form onsubmit="generarQr(event)">
+      <label for="inputText">Enlace:</label><br>
+      <input type="text" id="inputText" name="inputText"><br><br>
+      <input type="submit" value="Generar QR">
+    </form>
+
+    <div id="qrcode"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+    <script type="text/javascript">
+      function generarQr(event){
+        event.preventDefault();
+
+          var inputValue = document.getElementById("inputText").value;
+
+          var nuevoQr = document.getElementById("qrcode");
+          nuevoQr.innerHTML = "";
+
+          var qrcode = new QRCode(nuevoQr, {
+          text: inputValue,
+          width: 128,
+          height: 128,
+          colorDark : "#000000",
+          colorLight : "#ffffff",
+          correctLevel : QRCode.CorrectLevel.Q,
+      });
+
+      setTimeout(function(){
+        var img = nuevoQr.getElementsByTagName("img")[0];
+        if(img){
+          var imgSrc = img.src;
+          var a = document.createElement('a');
+          a.href = imgSrc;
+          a.download = "qrcode.png";
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+        }
+      }, 300)
+    }
+    </script>
+  </body>
+</html>
