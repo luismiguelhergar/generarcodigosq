@@ -12,7 +12,15 @@
 
     <form onsubmit="generarQr(event)">
       <label for="inputText">Enlace:</label><br>
-      <input type="text" id="inputText" name="inputText"><br><br>
+      <input type="text" id="inputText" name="inputText"><br>
+
+      <label for="size">Tamaño QR</label>
+      <select id="size" name="size">
+        <option value="128">Pequeño</option>
+        <option value="256">Mediano</option>
+        <option value="512">Grande</option>
+      </select><br><br>
+
       <input type="submit" value="Generar QR">
     </form>
 
@@ -24,14 +32,15 @@
         event.preventDefault();
 
           var inputValue = document.getElementById("inputText").value;
+          var size = document.getElementById("size").value;
 
           var nuevoQr = document.getElementById("qrcode");
           nuevoQr.innerHTML = "";
 
           var qrcode = new QRCode(nuevoQr, {
           text: inputValue,
-          width: 128,
-          height: 128,
+          width: parseInt(size),
+          height: parseInt(size),
           colorDark : "#000000",
           colorLight : "#ffffff",
           correctLevel : QRCode.CorrectLevel.Q,
@@ -48,7 +57,7 @@
           a.click();
           document.body.removeChild(a);
         }
-      }, 300)
+      }, 500)
     }
     </script>
   </body>
