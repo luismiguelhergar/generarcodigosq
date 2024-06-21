@@ -18,8 +18,7 @@ body {
     color: #333;
   }
   
-  /*formulario*/
-  form {
+  section {
     background: #fff;
     padding: 20px;
     border-radius: 8px;
@@ -30,12 +29,14 @@ body {
   }
   
   /*etiquetas y el campo de entrada*/
-  label, input[type="text"] {
+  label, input {
+    box-sizing: border-box;
     display: block;
     width: 100%;
     margin-bottom: 10px;
+    text-align: center;
   }
-  
+
   /*botón*/
   button, input[type="submit"] {
     background-color: #779cd3;
@@ -44,6 +45,7 @@ body {
     border-radius: 4px;
     cursor: pointer;
     padding: 10px;
+    margin-bottom: 10px;
     width: 100%;
   }
   
@@ -55,5 +57,12 @@ body {
   /*contenedor del código QR */
   #qrcode {
     margin-top: 20px;
+    max-width: 300px;
+    max-height: 300px;
+    overflow: hidden;
+  }
+
+  #qrcode > img {
+    width: 100%;
   }
   

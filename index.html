@@ -10,76 +10,58 @@
 
   <body>
     <h2>Crear código QR</h2>
-
-    <form onsubmit="generarQr(event)">
-      <label for="inputText">Enlace:</label><br>
-      <input type="text" id="inputText" name="inputText"><br>
+<section>
+      <label for="inputText">Enlace:</label>
+      <input type="text" id="inputText" name="inputText" value="ssdsdf">
 
       <label for="size">Tamaño QR</label>
-      <select id="size" name="size">
-        <option value="128">Pequeño</option>
-        <option value="256">Mediano</option>
-        <option value="512">Grande</option>
-      </select><br><br>
+      <input type="number" id="size" name="size" value="512" />
 
-      <input type="submit" value="Generar QR"><br><br>
-      <button onclick="generarYDescargar('png')">Descargar en PNG</button><br><br>
-      <button onclick="generarYDescargar('svg')">Descargar en SVG</button><br>
-    </form>
+      <button onclick="descargarQrPng()">Descargar en PNG</button>
+      <!-- <button onclick="descargarQrSvg()">Descargar en SVG</button> -->
+    </section>
 
     <div id="qrcode"></div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+      <g id="qrcodesvg"/>
+    </svg>
+
+    <script src="qrcode.js"></script>
 
     <script type="text/javascript">
-      var nuevoQr = document.getElementById("qrcode");
 
-      function generarQr(event) {
-        if (event) {
-          event.preventDefault();
-        }
-
-        var inputValue = document.getElementById("inputText").value;
-        var size = document.getElementById("size").value;
-
-        nuevoQr.innerHTML = "";
+      function descargarQrSvg() {
+        var nuevoQr = document.getElementById("qrcodesvg");
+        var inputValue = document.getElementById("inputText");
+        var size = document.getElementById("size");
 
         new QRCode(nuevoQr, {
-          text: inputValue,
-          width: 128,
-          height: 128,
+          text: inputValue.value,
+          width: size.value,
+          height: size.value,
           colorDark : "#000000",
           colorLight : "#ffffff",
           correctLevel : QRCode.CorrectLevel.Q,
-      });
-
-      setTimeout(function(){
-        var img = nuevoQr.getElementsByTagName("img")[0];
-        if(img){
-          var imgSrc = img.src;
-          var a = document.createElement('a');
-          a.href = imgSrc;
-          a.download = nombreAleatorio("png");
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-        }
+          useSVG: true
+        });
+        
       }
 
-      function descargarSVG() {
-        var svg = nuevoQr.querySelector("svg");
-        if (svg) {
-          var svgData = new XMLSerializer().serializeToString(svg);
-          var blob = new Blob([svgData], { type: 'image/svg+xml' });
-          var url = URL.createObjectURL(blob);
-          var a = document.createElement('a');
-          a.href = url;
-          a.download = nombreAleatorio("svg");
-          document.body.appendChild(a);
-          a.click();
-          document.body.removeChild(a);
-          URL.revokeObjectURL(url);
-        }
+      function descargarQrPng() {
+        var nuevoQr = document.getElementById("qrcode");
+        var inputValue = document.getElementById("inputText");
+        var size = document.getElementById("size");      
+
+        new QRCode(nuevoQr, {
+          text: inputValue.value,
+          width: size.value,
+          height: size.value,
+          colorDark : "#000000",
+          colorLight : "#ffffff",
+          correctLevel : QRCode.CorrectLevel.Q,
+        });
+
       }
     </script>
   </body>
