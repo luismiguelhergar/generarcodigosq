@@ -66,13 +66,18 @@
         }, 500);
       }
 
+      function nombreAleatorio(extension){
+        var segundos = Math.floor(Date.now()/1000);
+        return `qrcode_${segundos}.${extension}`;
+      }
+
       function descargarPNG() {
         var img = nuevoQr.querySelector("img");
         if (img) {
           var imgSrc = img.src;
           var a = document.createElement('a');
           a.href = imgSrc;
-          a.download = "qrcode.png";
+          a.download = nombreAleatorio("png");
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
@@ -87,7 +92,7 @@
           var url = URL.createObjectURL(blob);
           var a = document.createElement('a');
           a.href = url;
-          a.download = "qrcode.svg";
+          a.download = nombreAleatorio("svg");
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
