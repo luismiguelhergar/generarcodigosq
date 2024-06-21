@@ -37,7 +37,7 @@ body {
   }
   
   /*botón*/
-  input[type="submit"] {
+  button, input[type="submit"] {
     background-color: #779cd3;
     color: white;
     border: none;
@@ -48,7 +48,7 @@ body {
   }
   
   /*Estilo para el botón al pasar el ratón*/
-  input[type="submit"]:hover {
+  button:hover, input[type="submit"]:hover {
     background-color: #4569a0;
   }
   

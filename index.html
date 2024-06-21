@@ -22,13 +22,12 @@
         <option value="512">Grande</option>
       </select><br><br>
 
-      <input type="submit" value="Generar QR">
+      <input type="submit" value="Generar QR"><br><br>
+      <button onclick="generarYDescargar('png')">Descargar en PNG</button><br><br>
+      <button onclick="generarYDescargar('svg')">Descargar en SVG</button><br>
     </form>
 
     <div id="qrcode"></div>
-
-    <button onclick="generarYDescargar('png')">Descargar en PNG</button>
-    <button onclick="generarYDescargar('svg')">Descargar en SVG</button>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
