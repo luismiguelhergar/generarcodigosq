@@ -53,6 +53,8 @@
         var inputValue = document.getElementById("inputText");
         var size = document.getElementById("size");      
 
+        nuevoQr.innerHTML = "";
+
         new QRCode(nuevoQr, {
           text: inputValue.value,
           width: size.value,
